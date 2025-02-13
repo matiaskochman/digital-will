@@ -13,7 +13,12 @@ const includedPaths = [
   'tsconfig.build.json',
   'package.json',
   'tsconfig.json',
+  'Dockerfile',
+  'docker-compose.yml',
+  'docker-compose.yml',
+  '_upload_',
   'nest-cli.json',
+  '.vscode',
 ];
 
 // Función para verificar si un archivo/directorio debe ser excluido

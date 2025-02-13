@@ -1,0 +1,26 @@
+{
+  "ownerWalletAddress": "0x4b23D303D9e3719D6CDf8d172Ea030F80509ea15",
+  "personalInfo": {
+    "fullName": "Juan Pérez",
+    "identification": "DNI 12345678"
+  },
+  "beneficiaries": [
+    {
+      "name": "Ana López",
+      "allocation": "50%"
+    },
+    {
+      "name": "Carlos Gómez",
+      "allocation": "50%"
+    }
+  ],
+  "assets": {
+    "crypto": {
+      "ETH": 1.5,
+      "BTC": 0.2
+    },
+    "realEstate": {
+      "house": "123 Calle Falsa, Springfield"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    ports:
+      - '8850:3306'
+      # - '${DB_PORT}:3306' # DB_PORT en .env = puerto del host (ej: 3306)
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -uroot -p${DB_PASSWORD}']
+      interval: 5s
+      timeout: 30s
+      retries: 5
+    networks: # Opcional, pero buena práctica
+      - app-network
+  digital-will:
+    build: .
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      NODE_ENV: production
+      DB_HOST: mysql # Nombre del servicio como hostname
+      DB_PORT: 3306 # Puerto interno del contenedor MySQL
+      DB_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      LIGHTHOUSE_API_KEY: ${LIGHTHOUSE_API_KEY}
+      ALCHEMY_ETHEREUM_SEPOLIA_URL: ${ALCHEMY_ETHEREUM_SEPOLIA_URL}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks: # Misma red que MySQL
+      - app-network
+
+volumes:
+  mysql_data:
+networks: # Red explícita (opcional pero recomendada)
+  app-network:
+    driver: bridge

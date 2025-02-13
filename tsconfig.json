@@ -1,21 +1,46 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
+    // Usa "NodeNext" si prefieres nomenclatura .mts/.cts
+    // o seguir la convención Node para ESM
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    // "moduleResolution": "node",
+    // O puedes dejar "ES2021"/"ES2022"/"ESNext" según tus necesidades
+    "target": "ES2022",
+
+    // Dónde irá el código compilado
+    "outDir": "./dist",
+    // De dónde parte tu código fuente
+    "rootDir": "./src",
+
+    // Para que funcione bien con librerías comunes y puedas hacer
+    // import default desde módulos CommonJS
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    // Decorators necesarios para Nest
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
+
+    // Ajustes generales de TS
+    "strict": true,
     "skipLibCheck": true,
-    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "removeComments": true,
+    "sourceMap": true,
+    "declaration": true,
+    "incremental": false,
+
+    // Si quieres mantener el tipado más estricto todavía
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "test"],
+
+  // Esto ayuda si usas ts-node directamente en modo ESM
+  "ts-node": {
+    "esm": true
   }
 }

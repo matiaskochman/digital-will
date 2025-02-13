@@ -1,0 +1,79 @@
+// {
+//   "version": "0.2.0",
+//   "configurations": [
+//     {
+//       "type": "node",
+//       "request": "launch",
+//       "name": "Debug NestJS",
+//       "program": "${workspaceFolder}/node_modules/.bin/nest",
+//       "args": ["start", "--debug", "--watch"],
+//       "autoAttachChildProcesses": true,
+//       "restart": true,
+//       "sourceMaps": true,
+//       "smartStep": true,
+//       "resolveSourceMapLocations": [
+//         "${workspaceFolder}/**",
+//         "!**/node_modules/**"
+//       ],
+//       "console": "integratedTerminal",
+//       "internalConsoleOptions": "neverOpen",
+//       "runtimeExecutable": "node",
+//       "env": {
+//         "NODE_ENV": "development"
+//       }
+//     }
+//   ]
+// }
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug NestJS",
+      "program": "${workspaceFolder}/node_modules/.bin/nest",
+      "args": ["start", "--debug", "--watch"],
+      "autoAttachChildProcesses": true,
+      "restart": true,
+      "sourceMaps": true,
+      "smartStep": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "runtimeExecutable": "node",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    // Nueva configuración para tests
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Jest Tests",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": [
+        "--runInBand",
+        "--watchAll",
+        "${file}" // Permite debuggear el archivo actual
+      ],
+      "runtimeArgs": [
+        "--no-lazy",
+        "-r",
+        "ts-node/register",
+        "-r",
+        "tsconfig-paths/register"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "sourceMaps": true,
+      "smartStep": true,
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "disableOptimisticBPs": true
+    }
+  ]
+}
