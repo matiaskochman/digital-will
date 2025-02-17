@@ -23,6 +23,12 @@ export class WalletVerificationService {
     process.env.ALCHEMY_ETHEREUM_SEPOLIA_URL,
   );
 
+  /**
+   * Checks for positive ETH balance
+   * @param walletAddress - Address to check
+   * @returns Boolean balance status
+   * @throws InternalServerErrorException for RPC failures
+   */
   async hasPositiveETHBalance(walletAddress: string): Promise<boolean> {
     try {
       const balance: bigint = await this.provider.getBalance(walletAddress);
@@ -40,6 +46,13 @@ export class WalletVerificationService {
     }
   }
 
+  /**
+   * Verifies wallet meets access requirements
+   * @param walletAddress - Ethereum address to verify
+   * @param nftContractAddress - NFT contract address
+   * @returns Boolean verification result
+   * @throws BadRequestException for failed verifications
+   */
   async verifyWallet(
     walletAddress: string,
     nftContractAddress: string,

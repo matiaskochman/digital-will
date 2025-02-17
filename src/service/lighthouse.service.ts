@@ -8,6 +8,14 @@ import * as lighthouse from '@lighthouse-web3/sdk';
 export class LighthouseService {
   constructor(private configService: ConfigService) {}
 
+  /**
+   * Uploads encrypted file to Lighthouse storage
+   * @param filePath - Local path to file
+   * @param wallet - Ethereum wallet address
+   * @param signedMessage - Valid message signature
+   * @returns CID of uploaded content
+   * @throws Error for missing API key or upload failures
+   */
   async uploadEncryptedFile(
     filePath: string,
     wallet: string,
@@ -39,6 +47,14 @@ export class LighthouseService {
     }
   }
 
+  /**
+   * Downloads and decrypts file from Lighthouse
+   * @param cid - Content identifier
+   * @param walletAddress - Owner's wallet address
+   * @param signedMessage - Valid message signature
+   * @returns Decrypted file content
+   * @throws BadRequestException for decryption failures
+   */
   async downloadEncryptedFile(
     cid: string,
     walletAddress: string,

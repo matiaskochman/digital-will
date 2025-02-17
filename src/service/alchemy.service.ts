@@ -42,6 +42,13 @@ export class AlchemyService {
     }
   }
 
+  /**
+   * Checks for token ownership via Alchemy RPC
+   * @param ownerAddr - Wallet address to check
+   * @param contractType - Token type (ERC20/ERC721)
+   * @returns Boolean indicating token ownership
+   * @throws Error for RPC failures
+   */
   async hasAtLeastOneToken(
     ownerAddr: string,
     contractType: 'erc20' | 'erc721' = 'erc20',

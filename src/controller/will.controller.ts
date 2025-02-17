@@ -34,6 +34,13 @@ export class WillController {
     private readonly walletVerificationService: WalletVerificationService,
   ) {}
 
+  /**
+   * Handles encrypted will file upload and storage verification
+   * @param file - Uploaded will document
+   * @param walletData - Wallet verification data
+   * @returns CID of uploaded file
+   * @throws BadRequestException for verification or upload failures
+   */
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
@@ -78,6 +85,14 @@ export class WillController {
     }
   }
 
+  /**
+   * Retrieves and decrypts a will document
+   * @param cid - Content identifier of the will
+   * @param walletAddress - Requestor's wallet address
+   * @param signedMessage - Valid message signature
+   * @returns Decrypted will content
+   * @throws BadRequestException for ownership issues or decryption failures
+   */
   @Get(':cid')
   async getWill(
     @Param(new ValidationPipe({ transform: true })) params: GetWillParamsDto,

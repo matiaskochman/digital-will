@@ -10,6 +10,13 @@ export class WillService {
     private readonly willRepository: Repository<DigitalWill>,
   ) {}
 
+  /**
+   * Creates new will record
+   * @param ownerWalletAddress - Owner's wallet address
+   * @param cid - Content identifier
+   * @param nftContractAddress - Associated NFT contract
+   * @returns Created will entity
+   */
   async createWill(
     ownerWalletAddress: string,
     cid: string,
@@ -30,6 +37,13 @@ export class WillService {
   async getWillsByOwner(address: string): Promise<DigitalWill[]> {
     return this.willRepository.find({ where: { ownerWalletAddress: address } });
   }
+  /**
+   * Verifies ownership of will document
+   * @param cid - Content identifier
+   * @param walletAddress - Claimant's address
+   * @returns Will entity if verified
+   * @throws NotFoundException for invalid claims
+   */
   async verifyOwnership(
     cid: string,
     walletAddress: string,
